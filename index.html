@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guides d'Achat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #5dd9c1 0%, #4ec9b0 100%);
+            padding: 40px 20px 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .header-title {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .header-divider {
+            width: 100px;
+            height: 4px;
+            background: white;
+            margin: 0 auto 25px;
+        }
+
+        .header-description {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            opacity: 0.95;
+        }
+
+        .search-bar-wrapper {
+            max-width: 1200px;
+            margin: -40px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-bar {
+            background: white;
+            padding: 8px 8px 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-icon {
+            color: #E91E63;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            padding: 15px 10px;
+            color: #333;
+        }
+
+        .search-bar input::placeholder {
+            color: #bbb;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px 20px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .article-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .article-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .article-category {
+            color: #E91E63;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .article-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .article-divider {
+            width: 50px;
+            height: 3px;
+            background: #E91E63;
+            margin-bottom: 12px;
+        }
+
+        .article-date {
+            color: #7f8c8d;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 10px 16px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            border-color: #E91E63;
+            color: #E91E63;
+        }
+
+        .pagination button.active {
+            background: #E91E63;
+            color: white;
+            border-color: #E91E63;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            color: #7f8c8d;
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 30px 20px 50px;
+            }
+
+            .header-title {
+                font-size: 48px;
+            }
+
+            .header-description {
+                font-size: 15px;
+            }
+
+            .article-card {
+                flex-direction: column;
+            }
+
+            .article-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .article-title {
+                font-size: 18px;
+            }
+
+            .pagination {
+                gap: 5px;
+            }
+
+            .pagination button {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            .search-bar {
+                padding: 6px 6px 6px 15px;
+            }
+
+            .search-bar input {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <h1 class="header-title">Guides d'achat</h1>
+        <div class="header-divider"></div>
+        <p class="header-description">
+            Avec les guides d'achat de Conseil Direct, ne ressentez plus jamais de regret pour un achat. Tout au long de l'année, nos choix vous accompagnent dans la sélection de vos smartphones, tablettes, ordinateurs, téléviseurs ou outillages selon votre budget et vos exigences. Mise à jour régulièrement.
+        </p>
+    </div>
+
+    <div class="search-bar-wrapper">
+        <div class="search-bar">
+            <div class="search-icon">🔍</div>
+            <input type="text" id="searchInput" placeholder="Rechercher le test d'un produit ou d'une marque">
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="articlesContainer"></div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+
+    <script>
+        // Données d'exemple (à remplacer par vos vraies données)
+        const allArticles = [
+            {
+                id: 1,
+                category: "GUIDES D'ACHAT TV",
+                title: "Quel TV Sony choisir en 2025 ? Le guide complet",
+                date: "28 novembre 2025 · 17:59",
+                image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=400&fit=crop"
+            },
+            {
+                id: 2,
+                category: "GUIDES D'ACHAT",
+                title: "Meilleur PC portable pour étudiant en 2025 : notre comparatif des modèles recommandés",
+                date: "28 novembre 2025 · 11:37",
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop"
+            },
+            {
+                id: 3,
+                category: "GUIDES D'ACHAT",
+                title: "Quels sont les meilleurs TV QLED en 2025 ? Notre sélection",
+                date: "28 novembre 2025 · 09:30",
+                image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=400&fit=crop"
+            },
+            {
+                id: 4,
+                category: "GUIDES D'ACHAT",
+                title: "Les meilleurs smartphones en 2025",
+                date: "27 novembre 2025 · 15:20",
+                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop"
+            },
+            {
+                id: 5,
+                category: "GUIDES D'ACHAT",
+                title: "Casques audio sans fil : notre top 10",
+                date: "26 novembre 2025 · 10:15",
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop"
+            }
+        ];
+
+        const ITEMS_PER_PAGE = 20;
+        let currentPage = 1;
+        let filteredArticles = [...allArticles];
+
+        function renderArticles() {
+            const container = document.getElementById('articlesContainer');
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIndex = startIndex + ITEMS_PER_PAGE;
+            const articlesToShow = filteredArticles.slice(startIndex, endIndex);
+
+            if (articlesToShow.length === 0) {
+                container.innerHTML = '<div class="no-results">Aucun article trouvé</div>';
+                return;
+            }
+
+            container.innerHTML = articlesToShow.map(article => `
+                <div class="article-card">
+                    <img src="${article.image}" alt="${article.title}" class="article-image">
+                    <div class="article-content">
+                        <div>
+                            <div class="article-category">${article.category}</div>
+                            <h2 class="article-title">${article.title}</h2>
+                            <div class="article-divider"></div>
+                        </div>
+                        <div class="article-date">${article.date}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+            const pagination = document.getElementById('pagination');
+
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+
+            let paginationHTML = `
+                <button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                    ← Précédent
+                </button>
+            `;
+
+            // Afficher les numéros de page
+            for (let i = 1; i <= totalPages; i++) {
+                if (
+                    i === 1 || 
+                    i === totalPages || 
+                    (i >= currentPage - 2 && i <= currentPage + 2)
+                ) {
+                    paginationHTML += `
+                        <button onclick="goToPage(${i})" class="${i === currentPage ? 'active' : ''}">
+                            ${i}
+                        </button>
+                    `;
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    paginationHTML += '<button disabled>...</button>';
+                }
+            }
+
+            paginationHTML += `
+                <button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    Suivant →
+                </button>
+            `;
+
+            pagination.innerHTML = paginationHTML;
+        }
+
+        function goToPage(page) {
+            const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+            if (page < 1 || page > totalPages) return;
+            
+            currentPage = page;
+            renderArticles();
+            renderPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function searchArticles(query) {
+            const searchTerm = query.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredArticles = [...allArticles];
+            } else {
+                filteredArticles = allArticles.filter(article => 
+                    article.title.toLowerCase().includes(searchTerm) ||
+                    article.category.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            currentPage = 1;
+            renderArticles();
+            renderPagination();
+        }
+
+        // Event listener pour la recherche
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchArticles(e.target.value);
+        });
+
+        // Initialisation
+        renderArticles();
+        renderPagination();
+    </script>
+</body>
+</html>
